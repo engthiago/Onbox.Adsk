@@ -1,0 +1,1115 @@
+{
+  "hubs": {
+    "jsonapi": {
+      "version": "1.0"
+    },
+    "links": {
+      "self": {
+        "href": "/project/v1/hubs"
+      }
+    },
+    "data": [
+      {
+        "type": "hubs",
+        "id": "a.hub.id.123",
+        "attributes": {
+          "name": "my team hub",
+          "extension": {
+            "type": "hubs:autodesk.core:Hub",
+            "version": "1.0",
+            "schema": {
+              "href": "/schema/v1/versions/hubs%3Aautodesk.core%3AHub-1.0"
+            },
+            "data": {}
+          },
+          "region": "US"
+        },
+        "links": {
+          "self": {
+            "href": "/project/v1/hubs/a.hub.id.123"
+          }
+        },
+        "relationships": {
+          "projects": {
+            "links": {
+              "related": {
+                "href": "/project/v1/hubs/a.hub.id.123/projects"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "hubs",
+        "id": "a.hub.id.456",
+        "attributes": {
+          "name": "my personal hub",
+          "extension": {
+            "type": "hubs:autodesk.a360:PersonalHub",
+            "version": "1.0",
+            "schema": {
+              "href": "/schema/v1/versions/hubs%3Aautodesk.a360%3APersonalHub-1.0"
+            },
+            "data": {}
+          },
+          "region": "US"
+        },
+        "links": {
+          "self": {
+            "href": "/project/v1/hubs/a.hub.id.456"
+          }
+        },
+        "relationships": {
+          "projects": {
+            "links": {
+              "related": {
+                "href": "/project/v1/hubs/a.hub.id.456/projects"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "hub": {
+    "jsonapi": {
+      "version": "1.0"
+    },
+    "links": {
+      "self": {
+        "href": "/project/v1/hubs/a.hub.id.123"
+      }
+    },
+    "data": {
+      "type": "hubs",
+      "id": "a.hub.id.123",
+      "attributes": {
+        "name": "my hub",
+        "extension": {
+          "data": {},
+          "version": "1.0",
+          "type": "hubs:autodesk.core:Hub",
+          "schema": {
+            "href": "/schema/v1/versions/hubs%3Aautodesk.core%3AHub-1.0"
+          }
+        },
+        "region": "US"
+      },
+      "relationships": {
+        "projects": {
+          "links": {
+            "related": {
+              "href": "/project/v1/hubs/a.hub.id.123/projects"
+            }
+          }
+        }
+      },
+      "links": {
+        "self": {
+          "href": "/project/v1/hubs/a.hub.id.123"
+        }
+      }
+    }
+  },
+  "projects": {
+    "jsonapi": {
+      "version": "1.0"
+    },
+    "links": {
+      "self": {
+        "href": "/project/v1/hubs/a.hub.id.123/projects"
+      },
+      "first": {
+        "href": "project/v1/hubs/a.hub.id.123/projects?page%5Bnumber%5D=0&page%5Blimit%5D=2"
+      },
+      "prev": {
+        "href": "/project/v1/hubs/a.hub.id.123/projects?page%5Bnumber%5D=0&page%5Blimit%5D=2"
+      },
+      "next": {
+        "href": "/project/v1/hubs/a.hub.id.123/projects?page%5Bnumber%5D=2&page%5Blimit%5D=2"
+      }
+    },
+    "data": [
+      {
+        "type": "projects",
+        "id": "a.project.id.xyz",
+        "attributes": {
+          "name": "my project",
+          "scopes": [
+            "global"
+          ],
+          "extension": {
+            "type": "projects:autodesk.core:Project",
+            "version": "1.0",
+            "schema": {
+              "href": "/schema/v1/versions/projects%3Aautodesk.core%3AProject-1.0"
+            },
+            "data": {}
+          }
+        },
+        "links": {
+          "self": {
+            "href": "/project/v1/hubs/a.hub.id.123/projects/a.project.id.xyz"
+          }
+        },
+        "relationships": {
+          "hub": {
+            "data": {
+              "type": "hubs",
+              "id": "a.hub.id.123"
+            },
+            "links": {
+              "related": {
+                "href": "/project/v1/hubs/a.hub.id.123"
+              }
+            }
+          },
+          "rootFolder": {
+            "data": {
+              "type": "folders",
+              "id": "urn:adsk.wipprod:dm.folder:hC6k4hndRWaeIVhIjvHu8w"
+            },
+            "meta": {
+              "link": {
+                "href": "/data/v1/projects/a.project.id.xyz/folders/urn%3Aadsk.wipprod%3Adm.folder%3AhC6k4hndRWaeIVhIjvHu8w"
+              }
+            }
+          },
+          "topFolders": {
+            "links": {
+              "related": {
+                "href": "/project/v1/hubs/a.hub.id.123/projects/a.project.id.xyz/topFolders"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "projects",
+        "id": "a.project.id.xyz",
+        "attributes": {
+          "name": "my project",
+          "scopes": [
+            "global"
+          ],
+          "extension": {
+            "type": "projects:autodesk.core:Project",
+            "version": "1.0",
+            "schema": {
+              "href": "/schema/v1/versions/projects%3Aautodesk.core%3AProject-1.0"
+            },
+            "data": {}
+          }
+        },
+        "links": {
+          "self": {
+            "href": "/project/v1/hubs/a.hub.id.123/projects/a.project.id.xyz"
+          }
+        },
+        "relationships": {
+          "hub": {
+            "data": {
+              "type": "hubs",
+              "id": "a.hub.id.123"
+            },
+            "links": {
+              "related": {
+                "href": "/project/v1/hubs/a.hub.id.123"
+              }
+            }
+          },
+          "rootFolder": {
+            "data": {
+              "type": "folders",
+              "id": "urn:adsk.wipprod:dm.folder:hC6k4hndRWaeIVhIjvHu8w"
+            },
+            "meta": {
+              "link": {
+                "href": "/data/v1/projects/a.project.id.xyz/folders/urn%3Aadsk.wipprod%3Adm.folder%3AhC6k4hndRWaeIVhIjvHu8w"
+              }
+            }
+          },
+          "topFolders": {
+            "links": {
+              "related": {
+                "href": "/project/v1/hubs/a.hub.id.123/projects/a.project.id.xyz/topFolders"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "project": {
+    "jsonapi": {
+      "version": "1.0"
+    },
+    "links": {
+      "self": {
+        "href": "/project/v1/hubs/a.hub.id.123/projects/a.project.id.xyz"
+      }
+    },
+    "data": {
+      "type": "projects",
+      "id": "a.project.id.xyz",
+      "attributes": {
+        "name": "my project",
+        "scopes": [
+          "global"
+        ],
+        "extension": {
+          "data": {},
+          "version": "1.0",
+          "type": "projects:autodesk.core:Project",
+          "schema": {
+            "href": "https://developer.api.autodesk.com/schema/v1/versions/projects%3Aautodesk.core%3AProject-1.0"
+          }
+        }
+      },
+      "relationships": {
+        "hub": {
+          "data": {
+            "type": "hubs",
+            "id": "a.hub.id.123"
+          },
+          "links": {
+            "related": {
+              "href": "/project/v1/hubs/a.hub.id.123/projects/a.project.id.xyz/hub"
+            }
+          }
+        },
+        "rootFolder": {
+          "meta": {
+            "link": {
+              "href": "/data/v1/projects/a.project.id.xyz/folders/urn%3Aadsk.wipprod%3Adm.folder%3AhC6k4hndRWaeIVhIjvHu8w"
+            }
+          },
+          "data": {
+            "type": "folders",
+            "id": "urn:adsk.wipprod:dm.folder:hC6k4hndRWaeIVhIjvHu8w"
+          }
+        },
+        "topFolders": {
+          "links": {
+            "related": {
+              "href": "/project/v1/hubs/a.hub.id.123/projects/a.project.id.xyz/topFolders"
+            }
+          }
+        }
+      },
+      "links": {
+        "self": {
+          "href": "/project/v1/hubs/a.hub.id.123/projects/a.project.id.xyz"
+        }
+      }
+    }
+  },
+  "topFolders": {
+    "jsonapi": {
+      "version": "1.0"
+    },
+    "links": {
+      "self": {
+        "href": "/project/v1/hubs/a.hub.id.123/projects/a.project.id.xyz/topFolders"
+      }
+    },
+    "data": [
+      {
+        "type": "folders",
+        "id": "urn:adsk.wipprod:dm.folder:hC6k4hndRWaeIVhIjvHu8w",
+        "attributes": {
+          "name": "Plans",
+          "displayName": "Plans",
+          "createTime": "2015-11-27T11:11:23.000Z",
+          "createUserId": "BW9RM76WZBGL",
+          "createUserName": "John Doe",
+          "lastModifiedTime": "2015-11-27T11:11:27.000Z",
+          "lastModifiedUserId": "BW9RM76WZBGL",
+          "lastModifiedUserName": "John Doe",
+          "objectCount": 4,
+          "hidden": false,
+          "extension": {
+            "type": "folders:autodesk.bim360:Folder",
+            "version": "1.0",
+            "schema": {
+              "href": "https://developer.api.autodesk.com/schema/v1/versions/folders%3Aautodesk.bim360%3AFolder-1.0"
+            },
+            "data": {
+              "allowedTypes": [
+                "folders",
+                "items:autodesk.bim360:File",
+                "items:autodesk.bim360:Document",
+                "items:autodesk.bim360:TitleBlock"
+              ],
+              "visibleTypes": [
+                "folders",
+                "items:autodesk.bim360:Document"
+              ]
+            }
+          }
+        },
+        "links": {
+          "self": {
+            "href": "/data/v1/projects/a.project.id.xyz/folders/urn%3Aadsk.wipprod%3Adm.folder%3AhC6k4hndRWaeIVhIjvHu8w"
+          }
+        },
+        "relationships": {
+          "parent": {
+            "links": {
+              "related": {
+                "href": "/data/v1/projects/a.project.id.xyz/folders/urn%3Aadsk.wipprod%3Adm.folder%3AhC6k4hndRWaeIVhIjvHu8w/parent"
+              }
+            },
+            "data": {
+              "type": "folders",
+              "id": "urn:adsk.wipprod:dm.folder:sdfedf8wefl"
+            }
+          },
+          "refs": {
+            "links": {
+              "self": {
+                "href": "/data/v1/projects/a.project.id.xyz/folders/urn%3Aadsk.wipprod%3Adm.folder%3AhC6k4hndRWaeIVhIjvHu8w/relationships/refs"
+              },
+              "related": {
+                "href": "/data/v1/projects/a.project.id.xyz/folders/urn%3Aadsk.wipprod%3Adm.folder%3AhC6k4hndRWaeIVhIjvHu8w/refs"
+              }
+            }
+          },
+          "links": {
+            "links": {
+              "self": {
+                "href": "/data/v1/projects/a.project.id.xyz/folders/urn%3Aadsk.wipprod%3Adm.folder%3AhC6k4hndRWaeIVhIjvHu8w/relationships/links"
+              }
+            }
+          },
+          "contents": {
+            "links": {
+              "related": {
+                "href": "/data/v1/projects/a.project.id.xyz/folders/urn%3Aadsk.wipprod%3Adm.folder%3AhC6k4hndRWaeIVhIjvHu8w/contents"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "download": {
+    "jsonapi": {
+      "version": "1.0"
+    },
+    "links": {
+      "self": {
+        "href": "/data/v1/projects/{project_id}/downloads/{download_id}"
+      }
+    },
+    "data": {
+      "type": "downloads",
+      "id": "{download_id}",
+      "attributes": {
+        "format": {
+          "fileType": "pdf"
+        }
+      },
+      "relationships": {
+        "source": {
+          "links": {
+            "related": {
+              "href": "/data/v1/projects/{project_id}/downloads/{download_id}/source"
+            }
+          },
+          "data": {
+            "type": "versions",
+            "id": "{version_id}"
+          }
+        },
+        "storage": {
+          "data": {
+            "type": "objects",
+            "id": "urn:adsk.objects:os.object:{wip_bucket}/{guid}.pdf"
+          },
+          "meta": {
+            "link": {
+              "href": "/oss/v2/buckets/{wip_bucket}/objects/{guid}.pdf?scopes={list_of_scopes}"
+            }
+          }
+        }
+      },
+      "links": {
+        "self": {
+          "href": "/data/v1/projects/{project_id}/downloads/{download_id}"
+        }
+      }
+    }
+  },
+  "job": {
+    "jsonapi": {
+      "version": "1.0"
+    },
+    "links": {
+      "self": {
+        "href": "/data/v1/projects/{project_id}/jobs/{job_id}"
+      }
+    },
+    "data": {
+      "type": "jobs",
+      "id": "{job_id}",
+      "attributes": {
+        "status": "queued"
+      },
+      "links": {
+        "self": {
+          "href": "/data/v1/projects/{project_id}/jobs/{job_id}"
+        }
+      }
+    }
+  },
+  "object": {
+    "jsonapi": {
+      "version": "1.0"
+    },
+    "links": {
+      "self": {
+        "href": "/oss/v2/buckets/wipbucket/objects/830b7ac3-dc75-4e36-aa32-7a1cff7599a1.dwg"
+      }
+    },
+    "data": {
+      "type": "objects",
+      "id": "urn:adsk.objects:os.object:wip.dm.prod.temp/830b7ac3-dc75-4e36-aa32-7a1cff7599a1.dwg",
+      "relationships": {
+        "target": {
+          "links": {
+            "related": {
+              "href": "/data/v1/projects/b.6f8813fe-31a7-4440-bc63-d8ca97c856b4/folders/urn%3Aadsk.wipprod%3Adm.folder%3Asdfedf8wefl"
+            }
+          },
+          "data": {
+            "type": "folders",
+            "id": "urn:adsk.wipprod:dm.folder:sdfedf8wefl"
+          }
+        }
+      }
+    }
+  },
+  "folder": {
+    "jsonapi": {
+      "version": "1.0"
+    },
+    "links": {
+      "self": {
+        "href": "/data/v1/projects/a.project.id.xyz/folders/urn%3Aadsk.wipprod%3Adm.folder%3AhC6k4hndRWaeIVhIjvHu8w"
+      }
+    },
+    "data": {
+      "type": "folders",
+      "id": "urn:adsk.wipprod:dm.folder:hC6k4hndRWaeIVhIjvHu8w",
+      "attributes": {
+        "name": "Plans",
+        "displayName": "Plans",
+        "createTime": "2015-11-27T11:11:23.000Z",
+        "createUserId": "BW9RM76WZBGL",
+        "createUserName": "John Doe",
+        "lastModifiedTime": "2015-11-27T11:11:27.000Z",
+        "lastModifiedUserId": "BW9RM76WZBGL",
+        "lastModifiedUserName": "John Doe",
+        "objectCount": 4,
+        "hidden": false,
+        "extension": {
+          "type": "folders:autodesk.bim360:Folder",
+          "version": "1.0",
+          "schema": {
+            "href": "https://developer.api.autodesk.com/schema/v1/versions/folders%3Aautodesk.bim360%3AFolder-1.0"
+          },
+          "data": {
+            "allowedTypes": [
+              "folders",
+              "items:autodesk.bim360:File",
+              "items:autodesk.bim360:Document",
+              "items:autodesk.bim360:TitleBlock"
+            ],
+            "visibleTypes": [
+              "folders",
+              "items:autodesk.bim360:Document"
+            ]
+          }
+        }
+      },
+      "links": {
+        "self": {
+          "href": "/data/v1/projects/a.project.id.xyz/folders/urn%3Aadsk.wipprod%3Adm.folder%3AhC6k4hndRWaeIVhIjvHu8w"
+        }
+      },
+      "relationships": {
+        "parent": {
+          "links": {
+            "related": {
+              "href": "/data/v1/projects/a.project.id.xyz/folders/urn%3Aadsk.wipprod%3Adm.folder%3AhC6k4hndRWaeIVhIjvHu8w/parent"
+            }
+          },
+          "data": {
+            "type": "folders",
+            "id": "urn:adsk.wipprod:dm.folder:sdfedf8wefl"
+          }
+        },
+        "refs": {
+          "links": {
+            "self": {
+              "href": "/data/v1/projects/a.project.id.xyz/folders/urn%3Aadsk.wipprod%3Adm.folder%3AhC6k4hndRWaeIVhIjvHu8w/relationships/refs"
+            },
+            "related": {
+              "href": "/data/v1/projects/a.project.id.xyz/folders/urn%3Aadsk.wipprod%3Adm.folder%3AhC6k4hndRWaeIVhIjvHu8w/refs"
+            }
+          }
+        },
+        "links": {
+          "links": {
+            "self": {
+              "href": "/data/v1/projects/a.project.id.xyz/folders/urn%3Aadsk.wipprod%3Adm.folder%3AhC6k4hndRWaeIVhIjvHu8w/relationships/links"
+            }
+          }
+        },
+        "contents": {
+          "links": {
+            "related": {
+              "href": "/data/v1/projects/a.project.id.xyz/folders/urn%3Aadsk.wipprod%3Adm.folder%3AhC6k4hndRWaeIVhIjvHu8w/contents"
+            }
+          }
+        }
+      }
+    }
+  },
+  "folderContents": {
+    "jsonapi": {
+      "version": "1.0"
+    },
+    "links": {
+      "self": {
+        "href": "/data/v1/projects/a.project.id.xyz/folders/urn%3Aadsk.wipprod%3Adm.folder%3Asdfedf8wefl/contents?page%5Bnumber%5D=3"
+      },
+      "first": {
+        "href": "/data/v1/projects/a.project.id.xyz/folders/urn%3Aadsk.wipprod%3Adm.folder%3Asdfedf8wefl/contents?page%5Bnumber%5D=0"
+      },
+      "prev": {
+        "href": "/data/v1/projects/a.project.id.xyz/folders/urn%3Aadsk.wipprod%3Adm.folder%3Asdfedf8wefl/contents?page%5Bnumber%5D=2"
+      },
+      "next": {
+        "href": "/data/v1/projects/a.project.id.xyz/folders/urn%3Aadsk.wipprod%3Adm.folder%3Asdfedf8wefl/contents?page%5Bnumber%5D=4"
+      }
+    },
+    "data": [
+      {
+        "type": "folders",
+        "id": "urn:adsk.wipprod:dm.folder:hC6k4hndRWaeIVhIjvHu8w",
+        "attributes": {
+          "name": "Plans",
+          "displayName": "Plans",
+          "createTime": "2015-11-27T11:11:23.000Z",
+          "createUserId": "BW9RM76WZBGL",
+          "createUserName": "John Doe",
+          "lastModifiedTime": "2015-11-27T11:11:27.000Z",
+          "lastModifiedUserId": "BW9RM76WZBGL",
+          "lastModifiedUserName": "John Doe",
+          "path": "/dm-test-root/f0cb4ba0-7722-0133-9814-0eeb7bad1e3b",
+          "objectCount": 4,
+          "hidden": false,
+          "extension": {
+            "type": "folders:autodesk.bim360:Folder",
+            "version": "1.0",
+            "schema": {
+              "href": "/schema/v1/versions/folders%3Aautodesk.bim360%3AFolder-1.0"
+            },
+            "data": {
+              "allowedTypes": [
+                "folders",
+                "items:autodesk.bim360:File",
+                "items:autodesk.bim360:Document",
+                "items:autodesk.bim360:TitleBlock"
+              ],
+              "visibleTypes": [
+                "folders",
+                "items:autodesk.bim360:Document"
+              ]
+            }
+          }
+        },
+        "links": {
+          "self": {
+            "href": "/data/v1/projects/a.project.id.xyz/folders/urn%3Aadsk.wipprod%3Adm.folder%3AhC6k4hndRWaeIVhIjvHu8w"
+          }
+        },
+        "relationships": {
+          "parent": {
+            "links": {
+              "related": {
+                "href": "/data/v1/projects/a.project.id.xyz/folders/urn%3Aadsk.wipprod%3Adm.folder%3Asdfedf8wefl"
+              }
+            },
+            "data": {
+              "type": "folders",
+              "id": "urn:adsk.wipprod:dm.folder:sdfedf8wefl"
+            }
+          },
+          "refs": {
+            "links": {
+              "self": {
+                "href": "/data/v1/projects/a.project.id.xyz/folders/urn%3Aadsk.wipprod%3Adm.folder%3AhC6k4hndRWaeIVhIjvHu8w/relationships/refs"
+              },
+              "related": {
+                "href": "/data/v1/projects/a.project.id.xyz/folders/urn%3Aadsk.wipprod%3Adm.folder%3AhC6k4hndRWaeIVhIjvHu8w/refs"
+              }
+            }
+          },
+          "links": {
+            "links": {
+              "self": {
+                "href": "/data/v1/projects/a.project.id.xyz/folders/urn%3Aadsk.wipprod%3Adm.folder%3AhC6k4hndRWaeIVhIjvHu8w/relationships/links"
+              }
+            }
+          },
+          "contents": {
+            "links": {
+              "related": {
+                "href": "/data/v1/projects/a.project.id.xyz/folders/urn%3Aadsk.wipprod%3Adm.folder%3AhC6k4hndRWaeIVhIjvHu8w/contents"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "items",
+        "id": "urn:adsk.wipprod:dm.lineage:hC6k4hndRWaeIVhIjvHu8w",
+        "attributes": {
+          "displayName": "my file",
+          "createTime": "2015-11-27T11:11:23.000Z",
+          "createUserId": "BW9RM76WZBGL",
+          "createUserName": "John Doe",
+          "lastModifiedTime": "2015-11-27T11:11:27.000Z",
+          "lastModifiedUserId": "BW9RM76WZBGL",
+          "lastModifiedUserName": "John Doe",
+          "hidden": false,
+          "reserved": true,
+          "reservedTime": "2015-11-27T11:11:25.000Z",
+          "reservedUserId": "BW9RM76WZBGL",
+          "reservedUserName": "John Doe",
+          "extension": {
+            "type": "items:autodesk.bim360:File",
+            "version": "1.0",
+            "schema": {
+              "href": "/schema/v1/versions/items%3Aautodesk.bim360%3AFile-1.0"
+            },
+            "data": {}
+          }
+        },
+        "links": {
+          "self": {
+            "href": "/data/v1/projects/a.project.id.xyz/items/urn%3Aadsk.wipprod%3Adm.lineage%3AhC6k4hndRWaeIVhIjvHu8w"
+          }
+        },
+        "relationships": {
+          "tip": {
+            "links": {
+              "related": {
+                "href": "/data/v1/projects/a.project.id.xyz/items/urn%3Aadsk.wipprod%3Adm.lineage%3AhC6k4hndRWaeIVhIjvHu8w/tip"
+              }
+            },
+            "data": {
+              "type": "versions",
+              "id": "urn:adsk.wipprod:fs.file:vf.d34fdsg3g?version=2"
+            }
+          },
+          "versions": {
+            "links": {
+              "related": {
+                "href": "/data/v1/projects/a.project.id.xyz/items/urn%3Aadsk.wipprod%3Adm.lineage%3AhC6k4hndRWaeIVhIjvHu8w/versions"
+              }
+            }
+          },
+          "refs": {
+            "links": {
+              "self": {
+                "href": "/data/v1/projects/a.project.id.xyz/items/urn%3Aadsk.wipprod%3Adm.lineage%3AhC6k4hndRWaeIVhIjvHu8w/relationships/refs"
+              },
+              "related": {
+                "href": "/data/v1/projects/a.project.id.xyz/items/urn%3Aadsk.wipprod%3Adm.lineage%3AhC6k4hndRWaeIVhIjvHu8w/refs"
+              }
+            }
+          },
+          "links": {
+            "links": {
+              "self": {
+                "href": "/data/v1/projects/a.project.id.xyz/items/urn%3Aadsk.wipprod%3Adm.lineage%3AhC6k4hndRWaeIVhIjvHu8w/relationships/links"
+              }
+            }
+          },
+          "parent": {
+            "links": {
+              "related": {
+                "href": "/data/v1/projects/a.project.id.xyz/folders/urn%3Aadsk.wipprod%3Adm.folder%3Asdfedf8wefl"
+              }
+            },
+            "data": {
+              "type": "folders",
+              "id": "urn:adsk.wipprod:dm.folder:sdfedf8wefl"
+            }
+          }
+        }
+      }
+    ],
+    "included": [
+      {
+        "type": "versions",
+        "id": "urn:adsk.wipprod:fs.file:vf.d34fdsg3g?version=2",
+        "attributes": {
+          "name": "version-test.pdf",
+          "displayName": "version-test.pdf",
+          "createTime": "2016-04-01T11:09:03.000Z",
+          "createUserId": "BW9RM76WZBGL",
+          "createUserName": "John Doe",
+          "lastModifiedTime": "2016-04-01T11:11:18.000Z",
+          "lastModifiedUserId": "BW9RM76WZBGL",
+          "lastModifiedUserName": "John Doe",
+          "versionNumber": 2,
+          "mimeType": "application/pdf",
+          "extension": {
+            "type": "versions:autodesk.bim360:File",
+            "version": "1.0",
+            "schema": {
+              "href": "/schema/v1/versions/versions%3Aautodesk.bim360%3AFile-1.0"
+            },
+            "data": {
+              "tempUrn": null,
+              "properties": {},
+              "storageUrn": "urn:adsk.objects:os.object:wip.dm.prod/3c8f6bbc-fe5c-4815-a92e-8b8635e7b1cb.pdf",
+              "storageType": "OSS"
+            }
+          }
+        },
+        "links": {
+          "self": {
+            "href": "/data/v1/projects/b.6f8813fe-31a7-4440-bc63-d8ca97c856b4/versions/urn%3Aadsk.wipprod%3Afs.file%3Avf.b909RzMKR4mhc3O7UBY_8g%3Fversion%3D1"
+          }
+        },
+        "relationships": {
+          "item": {
+            "links": {
+              "related": {
+                "href": "/data/v1/projects/b.6f8813fe-31a7-4440-bc63-d8ca97c856b4/items/urn%3Aadsk.wipprod%3Adm.lineage%3Ab909RzMKR4mhc3O7UBY_8g"
+              }
+            },
+            "data": {
+              "type": "items",
+              "id": "urn:adsk.wipprod:dm.lineage:b909RzMKR4mhc3O7UBY_8g"
+            }
+          },
+          "refs": {
+            "links": {
+              "self": {
+                "href": "/data/v1/projects/b.6f8813fe-31a7-4440-bc63-d8ca97c856b4/versions/urn%3Aadsk.wipprod%3Afs.file%3Avf.b909RzMKR4mhc3O7UBY_8g%3Fversion%3D1/relationships/refs"
+              },
+              "related": {
+                "href": "/data/v1/projects/b.6f8813fe-31a7-4440-bc63-d8ca97c856b4/versions/urn%3Aadsk.wipprod%3Afs.file%3Avf.b909RzMKR4mhc3O7UBY_8g%3Fversion%3D1/refs"
+              }
+            }
+          },
+          "links": {
+            "links": {
+              "self": {
+                "href": "/data/v1/projects/b.6f8813fe-31a7-4440-bc63-d8ca97c856b4/versions/urn%3Aadsk.wipprod%3Afs.file%3Avf.b909RzMKR4mhc3O7UBY_8g%3Fversion%3D1/relationships/links"
+              }
+            }
+          },
+          "storage": {
+            "meta": {
+              "link": {
+                "href": "/oss/v2/buckets/wipbucket/objects/3c8f6bbc-fe5c-4815-a92e-8b8635e7b1cb.pdf?scopes=b360project.6f8813fe-31a7-4440-bc63-d8ca97c856b4,global,O2tenant.tenantId"
+              }
+            },
+            "data": {
+              "type": "objects",
+              "id": "urn:adsk.objects:os.object:wip.dm.prod/3c8f6bbc-fe5c-4815-a92e-8b8635e7b1cb.pdf"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "item": {
+    "jsonapi": {
+      "version": "1.0"
+    },
+    "links": {
+      "self": {
+        "href": "/data/v1/projects/a.project.id.xyz/items/urn%3Aadsk.wipprod%3Adm.lineage%3AhC6k4hndRWaeIVhIjvHu8w"
+      }
+    },
+    "data": {
+      "type": "items",
+      "id": "urn:adsk.wipprod:dm.lineage:hC6k4hndRWaeIVhIjvHu8w",
+      "attributes": {
+        "displayName": "my file",
+        "extension": {
+          "data": {},
+          "version": "1.0",
+          "type": "items:autodesk.bim360:File",
+          "schema": {
+            "href": "https://developer.api.autodesk.com/schema/v1/versions/items%3Aautodesk.bim360%3AFile-1.0"
+          }
+        },
+        "createUserId": "BW9RM76WZBGL",
+        "createUserName": "John Doe",
+        "lastModifiedUserId": "BW9RM76WZBGL",
+        "lastModifiedUserName": "John Doe",
+        "lastModifiedTime": "2015-11-27T11:11:27.000Z",
+        "createTime": "2015-11-27T11:11:23.000Z",
+        "hidden": false,
+        "reserved": true,
+        "reservedTime": "2015-11-27T11:11:25.000Z",
+        "reservedUserId": "BW9RM76WZBGL",
+        "reservedUserName": "John Doe"
+      },
+      "relationships": {
+        "tip": {
+          "data": {
+            "type": "versions",
+            "id": "urn:adsk.wipprod:fs.file:vf.d34fdsg3g?version=2"
+          },
+          "links": {
+            "related": {
+              "href": "/data/v1/projects/a.project.id.xyz/items/urn%3Aadsk.wipprod%3Adm.lineage%3AhC6k4hndRWaeIVhIjvHu8w/tip"
+            }
+          }
+        },
+        "parent": {
+          "data": {
+            "type": "folders",
+            "id": "urn:adsk.wipprod:dm.folder:sdfedf8wefl"
+          },
+          "links": {
+            "related": {
+              "href": "/data/v1/projects/a.project.id.xyz/items/urn%3Aadsk.wipprod%3Adm.lineage%3AhC6k4hndRWaeIVhIjvHu8w/parent"
+            }
+          }
+        },
+        "versions": {
+          "links": {
+            "related": {
+              "href": "/data/v1/projects/a.project.id.xyz/items/urn%3Aadsk.wipprod%3Adm.lineage%3AhC6k4hndRWaeIVhIjvHu8w/versions"
+            }
+          }
+        },
+        "refs": {
+          "links": {
+            "self": {
+              "href": "/data/v1/projects/a.project.id.xyz/items/urn%3Aadsk.wipprod%3Adm.lineage%3AhC6k4hndRWaeIVhIjvHu8w/relationships/refs"
+            },
+            "related": {
+              "href": "/data/v1/projects/a.project.id.xyz/items/urn%3Aadsk.wipprod%3Adm.lineage%3AhC6k4hndRWaeIVhIjvHu8w/refs"
+            }
+          }
+        },
+        "links": {
+          "links": {
+            "self": {
+              "href": "/data/v1/projects/a.project.id.xyz/items/urn%3Aadsk.wipprod%3Adm.lineage%3AhC6k4hndRWaeIVhIjvHu8w/relationships/links"
+            }
+          }
+        }
+      },
+      "links": {
+        "self": {
+          "href": "/data/v1/projects/a.project.id.xyz/items/urn%3Aadsk.wipprod%3Adm.lineage%3AhC6k4hndRWaeIVhIjvHu8w"
+        }
+      }
+    },
+    "included": [
+      {
+        "type": "versions",
+        "id": "urn:adsk.wipprod:fs.file:vf.d34fdsg3g?version=2",
+        "attributes": {
+          "name": "version-test.pdf",
+          "displayName": "version-test.pdf",
+          "createTime": "2016-04-01T11:09:03.000Z",
+          "createUserId": "BW9RM76WZBGL",
+          "createUserName": "John Doe",
+          "lastModifiedTime": "2016-04-01T11:11:18.000Z",
+          "lastModifiedUserId": "BW9RM76WZBGL",
+          "lastModifiedUserName": "John Doe",
+          "versionNumber": 2,
+          "mimeType": "application/pdf",
+          "extension": {
+            "type": "versions:autodesk.bim360:File",
+            "version": "1.0",
+            "schema": {
+              "href": "/schema/v1/versions/versions%3Aautodesk.bim360%3AFile-1.0"
+            },
+            "data": {
+              "tempUrn": null,
+              "properties": {},
+              "storageUrn": "urn:adsk.objects:os.object:wip.dm.prod/3c8f6bbc-fe5c-4815-a92e-8b8635e7b1cb.pdf",
+              "storageType": "OSS"
+            }
+          }
+        },
+        "links": {
+          "self": {
+            "href": "/data/v1/projects/b.6f8813fe-31a7-4440-bc63-d8ca97c856b4/versions/urn%3Aadsk.wipprod%3Afs.file%3Avf.b909RzMKR4mhc3O7UBY_8g%3Fversion%3D1"
+          }
+        },
+        "relationships": {
+          "item": {
+            "links": {
+              "related": {
+                "href": "/data/v1/projects/b.6f8813fe-31a7-4440-bc63-d8ca97c856b4/items/urn%3Aadsk.wipprod%3Adm.lineage%3Ab909RzMKR4mhc3O7UBY_8g"
+              }
+            },
+            "data": {
+              "type": "items",
+              "id": "urn:adsk.wipprod:dm.lineage:b909RzMKR4mhc3O7UBY_8g"
+            }
+          },
+          "refs": {
+            "links": {
+              "self": {
+                "href": "/data/v1/projects/b.6f8813fe-31a7-4440-bc63-d8ca97c856b4/versions/urn%3Aadsk.wipprod%3Afs.file%3Avf.b909RzMKR4mhc3O7UBY_8g%3Fversion%3D1/relationships/refs"
+              },
+              "related": {
+                "href": "/data/v1/projects/b.6f8813fe-31a7-4440-bc63-d8ca97c856b4/versions/urn%3Aadsk.wipprod%3Afs.file%3Avf.b909RzMKR4mhc3O7UBY_8g%3Fversion%3D1/refs"
+              }
+            }
+          },
+          "links": {
+            "links": {
+              "self": {
+                "href": "/data/v1/projects/b.6f8813fe-31a7-4440-bc63-d8ca97c856b4/versions/urn%3Aadsk.wipprod%3Afs.file%3Avf.b909RzMKR4mhc3O7UBY_8g%3Fversion%3D1/relationships/links"
+              }
+            }
+          },
+          "storage": {
+            "meta": {
+              "link": {
+                "href": "/oss/v2/buckets/wipbucket/objects/3c8f6bbc-fe5c-4815-a92e-8b8635e7b1cb.pdf?scopes=b360project.6f8813fe-31a7-4440-bc63-d8ca97c856b4,global,O2tenant.tenantId"
+              }
+            },
+            "data": {
+              "type": "objects",
+              "id": "urn:adsk.objects:os.object:wip.dm.prod/3c8f6bbc-fe5c-4815-a92e-8b8635e7b1cb.pdf"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "version": {
+    "jsonapi": {
+      "version": "1.0"
+    },
+    "links": {
+      "self": {
+        "href": "/data/v1/projects/b.6f8813fe-31a7-4440-bc63-d8ca97c856b4/versions/urn%3Aadsk.wipprod%3Afs.file%3Avf.b909RzMKR4mhc3O7UBY_8g%3Fversion%3D2"
+      }
+    },
+    "data": {
+      "type": "versions",
+      "id": "urn:adsk.wipprod:fs.file:vf.b909RzMKR4mhc3O7UBY_8g?version=2",
+      "attributes": {
+        "name": "version-test.pdf",
+        "displayName": "version-test.pdf",
+        "createTime": "2016-04-01T11:12:35.000Z",
+        "createUserId": "BW9RM76WZBGL",
+        "createUserName": "John Doe",
+        "lastModifiedTime": "2016-04-01T11:15:22.000Z",
+        "lastModifiedUserId": "BW9RM76WZBGL",
+        "lastModifiedUserName": "John Doe",
+        "versionNumber": 2,
+        "mimeType": "application/pdf",
+        "extension": {
+          "type": "versions:autodesk.bim360:File",
+          "version": "1.0",
+          "schema": {
+            "href": "https://developer.api.autodesk.com/schema/v1/versions/versions%3Aautodesk.bim360%3AFile-1.0"
+          },
+          "data": {
+            "tempUrn": null,
+            "properties": {},
+            "storageUrn": "urn:adsk.objects:os.object:wip.dm.prod/9f8bdc3f-e29c-4ada-ab7b-bb8dfa821163.pdf",
+            "storageType": "OSS"
+          }
+        }
+      },
+      "links": {
+        "self": {
+          "href": "/data/v1/projects/b.6f8813fe-31a7-4440-bc63-d8ca97c856b4/versions/urn%3Aadsk.wipprod%3Afs.file%3Avf.b909RzMKR4mhc3O7UBY_8g%3Fversion%3D2"
+        }
+      },
+      "relationships": {
+        "item": {
+          "links": {
+            "related": {
+              "href": "/data/v1/projects/b.6f8813fe-31a7-4440-bc63-d8ca97c856b4/items/urn%3Aadsk.wipprod%3Adm.lineage%3Ab909RzMKR4mhc3O7UBY_8g"
+            }
+          },
+          "data": {
+            "type": "items",
+            "id": "urn:adsk.wipprod:dm.lineage:b909RzMKR4mhc3O7UBY_8g"
+          }
+        },
+        "refs": {
+          "links": {
+            "self": {
+              "href": "/data/v1/projects/b.6f8813fe-31a7-4440-bc63-d8ca97c856b4/versions/urn%3Aadsk.wipprod%3Afs.file%3Avf.b909RzMKR4mhc3O7UBY_8g%3Fversion%3D2/relationships/refs"
+            },
+            "related": {
+              "href": "/data/v1/projects/b.6f8813fe-31a7-4440-bc63-d8ca97c856b4/versions/urn%3Aadsk.wipprod%3Afs.file%3Avf.b909RzMKR4mhc3O7UBY_8g%3Fversion%3D2/refs"
+            }
+          }
+        },
+        "links": {
+          "links": {
+            "self": {
+              "href": "/data/v1/projects/b.6f8813fe-31a7-4440-bc63-d8ca97c856b4/versions/urn%3Aadsk.wipprod%3Afs.file%3Avf.b909RzMKR4mhc3O7UBY_8g%3Fversion%3D2/relationships/links"
+            }
+          }
+        },
+        "storage": {
+          "meta": {
+            "link": {
+              "href": "/oss/v2/buckets/wipbucket/objects/9f8bdc3f-e29c-4ada-ab7b-bb8dfa821163.pdf?scopes=b360project.6f8813fe-31a7-4440-bc63-d8ca97c856b4,global,O2tenant.tenantId"
+            }
+          },
+          "data": {
+            "type": "objects",
+            "id": "urn:adsk.objects:os.object:wip.dm.prod/9f8bdc3f-e29c-4ada-ab7b-bb8dfa821163.pdf"
+          }
+        },
+        "derivatives": {
+          "data": {
+            "type": "derivatives",
+            "id": "dXJuOmFkc2sud2lwcWE6ZnMuZmlsZTp2Zi50X3hodWwwYVFkbWhhN2FBaVBuXzlnP3ZlcnNpb249MQ"
+          },
+          "meta": {
+            "link": {
+              "href": "/modelderivative/v2/designdata/dXJuOmFkc2sud2lwcWE6ZnMuZmlsZTp2Zi50X3hodWwwYVFkbWhhN2FBaVBuXzlnP3ZlcnNpb249MQ/manifest?scopes=b360project.6f8813fe-31a7-4440-bc63-d8ca97c856b4,global,O2tenant.tenantId"
+            }
+          }
+        },
+        "thumbnails": {
+          "data": {
+            "type": "thumbnails",
+            "id": "dXJuOmFkc2sud2lwcWE6ZnMuZmlsZTp2Zi50X3hodWwwYVFkbWhhN2FBaVBuXzlnP3ZlcnNpb249MQ"
+          },
+          "meta": {
+            "link": {
+              "href": "/modelderivative/v2/designdata/dXJuOmFkc2sud2lwcWE6ZnMuZmlsZTp2Zi50X3hodWwwYVFkbWhhN2FBaVBuXzlnP3ZlcnNpb249MQ/thumbnail?scopes=b360project.295285be-9cac-44d6-b365-625ebd327483,global,O2tenant.tenantId"
+            }
+          }
+        },
+        "downloadFormats": {
+          "links": {
+            "related": {
+              "href": "/data/v1/projects/b.6f8813fe-31a7-4440-bc63-d8ca97c856b4/versions/urn%3Aadsk.wipprod%3Afs.file%3Avf.b909RzMKR4mhc3O7UBY_8g%3Fversion%3D2/downloadFormats"
+            }
+          }
+        }
+      }
+    }
+  }
+}
