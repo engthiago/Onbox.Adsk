@@ -74,17 +74,18 @@ namespace Onbox.Adsk.DataManagement
             return projects;
         }
 
-        public async Task<BIM360Project> SearchProjectsAsync(string hubId, string region, string token, string projectName)
+        public async Task<BIM360Project> SearchProjectsAsync(string hubId, string region, string projectName, string token)
         {
             int offset = 0;
             int maxCalls = 10;
             int currentCall = 0;
-            int maxProjectQueryCount = 100;
+            int limit = 100;
+
             while (true)
             {
                 currentCall++;
 
-                var projects = await GetProjectsAsync(hubId, region, token, offset, maxProjectQueryCount);
+                var projects = await GetProjectsAsync(hubId, region, token, offset, limit);
 
                 if (projects.Count == 0)
                 {

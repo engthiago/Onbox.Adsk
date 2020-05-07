@@ -114,10 +114,10 @@ namespace Onbox.Adsk.DataManagement.Core
     {
         public string Name { get; set; }
         public string DisplayName { get; set; }
-        public DateTimeOffset CreateTime { get; set; }
+        public DateTimeOffset? CreateTime { get; set; }
         public string CreateUserId { get; set; }
         public string CreateUserName { get; set; }
-        public DateTimeOffset LastModifiedTime { get; set; }
+        public DateTimeOffset? LastModifiedTime { get; set; }
         public string LastModifiedUserId { get; set; }
         public string LastModifiedUserName { get; set; }
         public long ObjectCount { get; set; }
@@ -189,10 +189,10 @@ namespace Onbox.Adsk.DataManagement.Core
     {
         public string Name { get; set; }
         public string DisplayName { get; set; }
-        public DateTimeOffset CreateTime { get; set; }
+        public DateTimeOffset? CreateTime { get; set; }
         public string CreateUserId { get; set; }
         public string CreateUserName { get; set; }
-        public DateTimeOffset LastModifiedTime { get; set; }
+        public DateTimeOffset? LastModifiedTime { get; set; }
         public string LastModifiedUserId { get; set; }
         public string LastModifiedUserName { get; set; }
         public string Path { get; set; }
@@ -228,10 +228,10 @@ namespace Onbox.Adsk.DataManagement.Core
     {
         public string Name { get; set; }
         public string DisplayName { get; set; }
-        public DateTimeOffset CreateTime { get; set; }
+        public DateTimeOffset? CreateTime { get; set; }
         public string CreateUserId { get; set; }
         public string CreateUserName { get; set; }
-        public DateTimeOffset LastModifiedTime { get; set; }
+        public DateTimeOffset? LastModifiedTime { get; set; }
         public string LastModifiedUserId { get; set; }
         public string LastModifiedUserName { get; set; }
         public long VersionNumber { get; set; }
@@ -343,11 +343,11 @@ namespace Onbox.Adsk.DataManagement.Core
         public string CreateUserName { get; set; }
         public string LastModifiedUserId { get; set; }
         public string LastModifiedUserName { get; set; }
-        public DateTimeOffset LastModifiedTime { get; set; }
-        public DateTimeOffset CreateTime { get; set; }
+        public DateTimeOffset? LastModifiedTime { get; set; }
+        public DateTimeOffset? CreateTime { get; set; }
         public bool Hidden { get; set; }
         public bool Reserved { get; set; }
-        public DateTimeOffset ReservedTime { get; set; }
+        public DateTimeOffset? ReservedTime { get; set; }
         public string ReservedUserId { get; set; }
         public string ReservedUserName { get; set; }
     }

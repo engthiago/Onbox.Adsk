@@ -15,13 +15,10 @@ namespace Onbox.Adsk.DataManagement.Core
         public string Name { get; set; }
 
         [JsonProperty("start_date")]
-        public DateTimeOffset StartDate { get; set; }
+        public DateTimeOffset? StartDate { get; set; }
 
         [JsonProperty("end_date")]
-        public DateTimeOffset EndDate { get; set; }
-
-        [JsonProperty("project_type")]
-        public string ProjectType { get; set; }
+        public DateTimeOffset? EndDate { get; set; }
 
         [JsonProperty("value")]
         public long Value { get; set; }
@@ -48,13 +45,22 @@ namespace Onbox.Adsk.DataManagement.Core
         public string StateOrProvince { get; set; }
 
         [JsonProperty("postal_code")]
-        public long PostalCode { get; set; }
+        public string PostalCode { get; set; }
 
         [JsonProperty("country")]
         public string Country { get; set; }
 
         [JsonProperty("business_unit_id")]
         public string BusinessUnitId { get; set; }
+
+        [JsonProperty("created_at")]
+        public DateTimeOffset? CreatedAt { get; set; }
+
+        [JsonProperty("updated_at")]
+        public DateTimeOffset? UpdatedAt { get; set; }
+
+        [JsonProperty("project_type")]
+        public string ProjectType { get; set; }
 
         [JsonProperty("timezone")]
         public string Timezone { get; set; }
@@ -69,12 +75,9 @@ namespace Onbox.Adsk.DataManagement.Core
         public string ContractType { get; set; }
 
         [JsonProperty("last_sign_in")]
-        public object LastSignIn { get; set; }
+        public DateTimeOffset? LastSignIn { get; set; }
 
-        [JsonProperty("created_at")]
-        public DateTimeOffset CreatedAt { get; set; }
-
-        [JsonProperty("updated_at")]
-        public DateTimeOffset UpdatedAt { get; set; }
+        [JsonProperty("service_types")]
+        public string ServiceTypes { get; set; }
     }
 }
