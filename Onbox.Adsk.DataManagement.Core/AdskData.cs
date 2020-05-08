@@ -137,6 +137,7 @@ namespace Onbox.Adsk.DataManagement.Core
     {
         public List<string> AllowedTypes { get; set; }
         public List<string> VisibleTypes { get; set; }
+        public List<string> Actions { get; set; }
     }
 
     public partial class FolderRelationships

@@ -31,9 +31,9 @@ namespace Onbox.Adsk.DataManagement
             return hubs;
         }
 
-        public async Task<BIM360Project> GetProjectAsync(string hubId, string projectId, string region, string token)
+        public async Task<BIM360Project> GetProjectAsync(string accountId, string projectId, string region, string token)
         {
-            var accountId = this.idConversionService.RemoveBIMPrefix(hubId);
+            accountId = this.idConversionService.RemoveBIMPrefix(accountId);
             projectId = this.idConversionService.RemoveBIMPrefix(projectId);
 
             var regionUrl = regionsService.GetRegionsUrl(region);
@@ -45,9 +45,9 @@ namespace Onbox.Adsk.DataManagement
             return project;
         }
 
-        public async Task<BIM360Project> PostProjectAsync(string hubId, BIM360CreateProjectReq request, string region, string token)
+        public async Task<BIM360Project> PostProjectAsync(string accountId, BIM360CreateProjectReq request, string region, string token)
         {
-            var accountId = this.idConversionService.RemoveBIMPrefix(hubId);
+            accountId = this.idConversionService.RemoveBIMPrefix(accountId);
 
             var regionUrl = regionsService.GetRegionsUrl(region);
 
@@ -58,13 +58,13 @@ namespace Onbox.Adsk.DataManagement
             return projects;
         }
 
-        public async Task<List<BIM360Project>> GetProjectsAsync(string hubId, string region, string token, int offset = 0, int limit = 100, string sortField = "-start_date")
+        public async Task<List<BIM360Project>> GetProjectsAsync(string accountId, string region, string token, int offset = 0, int limit = 30, string sortField = "-start_date")
         {
             offset = offset > 0 ? offset : 0;
             limit = limit > 0 ? limit : 0;
             limit = limit <= 100 ? limit : 100;
 
-            var accountId = this.idConversionService.RemoveBIMPrefix(hubId);
+            accountId = this.idConversionService.RemoveBIMPrefix(accountId);
             var regionUrl = regionsService.GetRegionsUrl(region);
 
             string endpoint = forgeBaseUrl
@@ -74,18 +74,18 @@ namespace Onbox.Adsk.DataManagement
             return projects;
         }
 
-        public async Task<BIM360Project> SearchProjectsAsync(string hubId, string region, string projectName, string token)
+        public async Task<BIM360Project> SearchProjectsAsync(string accountId, string region, string projectName, string token)
         {
             int offset = 0;
-            int maxCalls = 10;
+            int maxCalls = 20;
             int currentCall = 0;
-            int limit = 100;
+            int limit = 30;
 
             while (true)
             {
                 currentCall++;
 
-                var projects = await GetProjectsAsync(hubId, region, token, offset, limit);
+                var projects = await GetProjectsAsync(accountId, region, token, offset, limit);
 
                 if (projects.Count == 0)
                 {
@@ -107,9 +107,9 @@ namespace Onbox.Adsk.DataManagement
             }
         }
 
-        public async Task<TopFolders> GetTopFoldersAsync(string hubId, string projectId, string token)
+        public async Task<TopFolders> GetTopFoldersAsync(string accountId, string projectId, string token)
         {
-            var accountId = this.idConversionService.AddBIMPrefix(hubId);
+            accountId = this.idConversionService.AddBIMPrefix(accountId);
             projectId = this.idConversionService.AddBIMPrefix(projectId);
 
             string endpoint = forgeBaseUrl
@@ -119,8 +119,20 @@ namespace Onbox.Adsk.DataManagement
             return folders;
         }
 
-        public async Task<Folder> CreateFolderAsync(string projectId, string parentFolderId, string token)
+        public async Task<FolderContents> GetFolderContentsAsync(string projectId, string folderId, string token)
         {
+            projectId = this.idConversionService.AddBIMPrefix(projectId);
+
+            string endpoint = forgeBaseUrl
+                + $"data/v1/projects/{projectId}/folders/{folderId}/contents";
+
+            var forgeItems = await this.httpService.GetAsync<FolderContents>(endpoint, token);
+            return forgeItems;
+        }
+
+        public async Task<Folder> CreateFolderAsync(string folderName, string projectId, string parentFolderId, string token)
+        {
+            projectId = this.idConversionService.AddBIMPrefix(projectId);
 
             string endpoint = forgeBaseUrl
                 + $"data/v1/projects/{projectId}/folders";
@@ -136,7 +148,7 @@ namespace Onbox.Adsk.DataManagement
                     type = "folders",
                     attributes = new
                     {
-                        name = "FabCenter",
+                        name = folderName,
                         extension = new
                         {
                             type = "folders:autodesk.bim360:Folder",
@@ -161,8 +173,49 @@ namespace Onbox.Adsk.DataManagement
             return folder;
         }
 
+
+        public async Task<Storage> PrepareStorageObjectAsync(string projectId, string fileName, string folderId, string token)
+        {
+            projectId = this.idConversionService.AddBIMPrefix(projectId);
+
+            string endpoint = forgeBaseUrl
+                    + $"data/v1/projects/{projectId}/storage";
+
+            var req = new
+            {
+                jsonapi = new
+                {
+                    version = "1.0"
+                },
+                data = new
+                {
+                    type = "objects",
+                    attributes = new
+                    {
+                        name = fileName,
+                    },
+                    relationships = new
+                    {
+                        target = new
+                        {
+                            data = new
+                            {
+                                type = "folders",
+                                id = folderId
+                            }
+                        }
+                    }
+                }
+            };
+
+            var forgeStorageResult = await this.httpService.PostAsync<Storage>(endpoint, req, token);
+            return forgeStorageResult;
+        }
+
         public async Task<Item> CreateFirstItemVersionAsync(string projectId, string fileName, string folderId, Storage storage, string token)
         {
+            projectId = this.idConversionService.AddBIMPrefix(projectId);
+
             object createVersionReq = new
             {
                 jsonapi = new { version = "1.0" },
@@ -237,6 +290,8 @@ namespace Onbox.Adsk.DataManagement
 
         public async Task<Item> UpdateItemVersionAsync(string projectId, string fileName, string existingItemId, Storage storage, string region, string token)
         {
+            projectId = this.idConversionService.AddBIMPrefix(projectId);
+
             object updateVersionReq = new
             {
                 jsonapi = new { version = "1.0" },

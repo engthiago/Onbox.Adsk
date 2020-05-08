@@ -21,7 +21,7 @@ namespace Onbox.Adsk.DataManagement.Core
         public DateTimeOffset? EndDate { get; set; }
 
         [JsonProperty("value")]
-        public long Value { get; set; }
+        public long? Value { get; set; }
 
         [JsonProperty("currency")]
         public string Currency { get; set; }
