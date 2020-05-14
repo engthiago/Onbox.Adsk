@@ -28,7 +28,8 @@ namespace Onbox.Adsk.DataManagement
             string endpoint = forgeBaseUrl
                     + $"bim360/admin/v1/projects/{projectId}/users";
 
-            return await this.httpService.PostAsync<Paging<BIM360ProjectUser>>(endpoint, token);
+            return await this.httpService
+                .GetAsync<Paging<BIM360ProjectUser>>(endpoint, token);
         }
 
         public async Task<BIM360ProjectUser> GetProjectUserAsync(string projectId, string userId, string token)

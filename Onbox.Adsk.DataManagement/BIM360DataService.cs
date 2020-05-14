@@ -105,7 +105,7 @@ namespace Onbox.Adsk.DataManagement
                     return null;
                 }
 
-                offset += 100;
+                offset += limit;
             }
         }
 
@@ -359,6 +359,7 @@ namespace Onbox.Adsk.DataManagement
 
             return planFolder;
         }
+
 
         public string GetBIM360ItemUrl(string projectId, string folderId, string itemId)
         {
