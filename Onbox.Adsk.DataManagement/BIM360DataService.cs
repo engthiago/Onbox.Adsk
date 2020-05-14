@@ -81,6 +81,8 @@ namespace Onbox.Adsk.DataManagement
             int currentCall = 0;
             int limit = 30;
 
+            projectName = projectName.ToLower();
+
             while (true)
             {
                 currentCall++;
@@ -92,7 +94,7 @@ namespace Onbox.Adsk.DataManagement
                     return null;
                 }
 
-                var project = projects.FirstOrDefault(p => p.Name == projectName);
+                var project = projects.FirstOrDefault(p => p.Name.ToLower() == projectName);
                 if (project != null)
                 {
                     return project;
@@ -172,7 +174,6 @@ namespace Onbox.Adsk.DataManagement
             var folder = await this.httpService.PostAsync<Folder>(endpoint, req, token);
             return folder;
         }
-
 
         public async Task<Storage> PrepareStorageObjectAsync(string projectId, string fileName, string folderId, string token)
         {
@@ -334,6 +335,29 @@ namespace Onbox.Adsk.DataManagement
 
             var versionPayloadResult = await this.httpService.PostAsync<Item>(endpoint, updateVersionReq, token);
             return versionPayloadResult;
+        }
+
+        public async Task<FolderData> GetPlanFolderAsync(string accountId, string projectId, string token)
+        {
+            var topFolders = await this.GetTopFoldersAsync(accountId, projectId, token);
+            var planFolder = topFolders.Data
+                .FirstOrDefault(f => f.Attributes.Hidden == false
+                && f.Attributes.Extension.Data.Actions.Contains("CONVERT")
+                && f.Attributes.Extension.Data.Actions.Contains("SPLIT")
+                && f.Attributes.Extension.Data.Actions.Contains("OCR"));
+
+            return planFolder;
+        }
+
+        public async Task<FolderData> GetProjectFolderAsync(string accountId, string projectId, string token)
+        {
+            var topFolders = await this.GetTopFoldersAsync(accountId, projectId, token);
+            var planFolder = topFolders.Data
+                .FirstOrDefault(f => f.Attributes.Hidden == false
+                && f.Attributes.Extension.Data.Actions.Count == 1
+                && f.Attributes.Extension.Data.Actions.Contains("CONVERT"));
+
+            return planFolder;
         }
 
         public string GetBIM360ItemUrl(string projectId, string folderId, string itemId)
