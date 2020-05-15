@@ -337,29 +337,91 @@ namespace Onbox.Adsk.DataManagement
             return versionPayloadResult;
         }
 
-        public async Task<FolderData> GetPlanFolderAsync(string accountId, string projectId, string token)
+        public async Task<FolderData> GetPlansFolderAsync(string accountId, string projectId, string token)
         {
             var topFolders = await this.GetTopFoldersAsync(accountId, projectId, token);
-            var planFolder = topFolders.Data
-                .FirstOrDefault(f => f.Attributes.Hidden == false
-                && f.Attributes.Extension.Data.Actions.Contains("CONVERT")
-                && f.Attributes.Extension.Data.Actions.Contains("SPLIT")
-                && f.Attributes.Extension.Data.Actions.Contains("OCR"));
 
-            return planFolder;
+            return GetPlansFolder(topFolders);
         }
 
-        public async Task<FolderData> GetProjectFolderAsync(string accountId, string projectId, string token)
+        public FolderData GetPlansFolder(TopFolders topFolders)
+        {
+            var plansFolder = topFolders.Data.FirstOrDefault(f => f.Attributes.Name == "Plans");
+
+            // If plans folder not there, maybe it has been renamed?
+            // Looks like different languages do not affect the API, only the UI itself, because it is a browser based translation as per link: (Tested and worked)
+            // https://knowledge.autodesk.com/support/bim-360/learn-explore/caas/CloudHelp/cloudhelp/ENU/BIM-360-Docs/files/GUID-0F437870-94AE-46AC-BDFE-F3994B3A98D0-htm.html
+            if (plansFolder == null)
+            {
+                // Try to check for a folder that meets the requirements and have been edited by a user
+                plansFolder = topFolders.Data
+                                .FirstOrDefault(f => f.Attributes.Hidden == false
+                                && f.Attributes.Extension != null
+                                && f.Attributes.Extension.Data != null
+                                && f.Attributes.Extension.Data.Actions != null
+                                && f.Attributes.Extension.Data.Actions.Contains("CONVERT")
+                                && f.Attributes.Extension.Data.Actions.Contains("SPLIT")
+                                && f.Attributes.Extension.Data.Actions.Contains("OCR")
+                                && !string.IsNullOrWhiteSpace(f.Attributes.LastModifiedUserId));
+
+                // If the above fails... the last hope is to grab any folder that meets the requirements...
+                if (plansFolder == null)
+                {
+                    plansFolder = topFolders.Data
+                                    .FirstOrDefault(f => f.Attributes.Hidden == false
+                                    && f.Attributes.Extension != null
+                                    && f.Attributes.Extension.Data != null
+                                    && f.Attributes.Extension.Data.Actions != null
+                                    && f.Attributes.Extension.Data.Actions.Contains("CONVERT")
+                                    && f.Attributes.Extension.Data.Actions.Contains("SPLIT")
+                                    && f.Attributes.Extension.Data.Actions.Contains("OCR"));
+                }
+            }
+
+            return plansFolder;
+        }
+
+        public async Task<FolderData> GetProjectFilesFolderAsync(string accountId, string projectId, string token)
         {
             var topFolders = await this.GetTopFoldersAsync(accountId, projectId, token);
-            var planFolder = topFolders.Data
-                .FirstOrDefault(f => f.Attributes.Hidden == false
-                && f.Attributes.Extension.Data.Actions.Count == 1
-                && f.Attributes.Extension.Data.Actions.Contains("CONVERT"));
 
-            return planFolder;
+            return GetProjectFilesFolder(topFolders);
         }
 
+        public FolderData GetProjectFilesFolder(TopFolders topFolders)
+        {
+            var projectFolder = topFolders.Data.FirstOrDefault(f => f.Attributes.Name == "Project Files");
+
+            // If project files folder not there, maybe it has been renamed?
+            // Looks like different languages do not affect the API, only the UI itself, because it is a browser based translation as per link: (Tested and worked)
+            // https://knowledge.autodesk.com/support/bim-360/learn-explore/caas/CloudHelp/cloudhelp/ENU/BIM-360-Docs/files/GUID-0F437870-94AE-46AC-BDFE-F3994B3A98D0-htm.html
+            if (projectFolder == null)
+            {
+                // Try to check for a folder that meets the requirements and have been edited by a user
+                projectFolder = topFolders.Data
+                                .FirstOrDefault(f => f.Attributes.Hidden == false
+                                && f.Attributes.Extension != null
+                                && f.Attributes.Extension.Data != null
+                                && f.Attributes.Extension.Data.Actions != null
+                                && f.Attributes.Extension.Data.Actions.Count == 1
+                                && f.Attributes.Extension.Data.Actions.Contains("CONVERT")
+                                && !string.IsNullOrWhiteSpace(f.Attributes.LastModifiedUserId));
+
+                // If the above fails... the last hope is to grab any folder that meets the requirements...
+                if (projectFolder == null)
+                {
+                    projectFolder = topFolders.Data
+                                    .FirstOrDefault(f => f.Attributes.Hidden == false
+                                    && f.Attributes.Extension != null
+                                    && f.Attributes.Extension.Data != null
+                                    && f.Attributes.Extension.Data.Actions != null
+                                    && f.Attributes.Extension.Data.Actions.Count == 1
+                                    && f.Attributes.Extension.Data.Actions.Contains("CONVERT"));
+                }
+            }
+
+            return projectFolder;
+        }
 
         public string GetBIM360ItemUrl(string projectId, string folderId, string itemId)
         {
