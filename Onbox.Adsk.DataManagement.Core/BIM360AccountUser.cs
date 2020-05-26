@@ -47,7 +47,7 @@ namespace Onbox.Adsk.DataManagement.Core
         public string ImageUrl { get; set; }
 
         [JsonProperty("last_sign_in")]
-        public object LastSignIn { get; set; }
+        public DateTimeOffset? LastSignIn { get; set; }
 
         [JsonProperty("address_line_1")]
         public string AddressLine1 { get; set; }
@@ -59,7 +59,7 @@ namespace Onbox.Adsk.DataManagement.Core
         public string City { get; set; }
 
         [JsonProperty("postal_code")]
-        public long PostalCode { get; set; }
+        public string PostalCode { get; set; }
 
         [JsonProperty("state_or_province")]
         public string StateOrProvince { get; set; }
