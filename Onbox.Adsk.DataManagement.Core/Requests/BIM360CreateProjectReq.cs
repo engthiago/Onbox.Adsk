@@ -21,7 +21,7 @@ namespace Onbox.Adsk.DataManagement.Core.Requests
         public string ProjectType { get; set; }
 
         [JsonProperty("value")]
-        public long Value { get; set; }
+        public long? Value { get; set; }
 
         [JsonProperty("currency")]
         public string Currency { get; set; }
@@ -42,7 +42,7 @@ namespace Onbox.Adsk.DataManagement.Core.Requests
         public string StateOrProvince { get; set; }
 
         [JsonProperty("postal_code")]
-        public long PostalCode { get; set; }
+        public string PostalCode { get; set; }
 
         [JsonProperty("country")]
         public string Country { get; set; }

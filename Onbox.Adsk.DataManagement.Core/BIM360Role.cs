@@ -20,6 +20,6 @@ namespace Onbox.Adsk.DataManagement.Core
         public BIM360Services Services { get; set; }
 
         [JsonProperty("member_group_id")]
-        public long MemberGroupId { get; set; }
+        public string MemberGroupId { get; set; }
     }
 }

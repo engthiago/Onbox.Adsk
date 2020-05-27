@@ -17,7 +17,7 @@ namespace Onbox.Adsk.DataManagement.Core
         public string AddressLine2 { get; set; }
         public string City { get; set; }
         public string StateOrProvince { get; set; }
-        public long PostalCode { get; set; }
+        public string PostalCode { get; set; }
         public string Country { get; set; }
         public string ImageUrl { get; set; }
         public Phone Phone { get; set; }
@@ -41,7 +41,7 @@ namespace Onbox.Adsk.DataManagement.Core
     {
         public string Number { get; set; }
         public string PhoneType { get; set; }
-        public long Extension { get; set; }
+        public string Extension { get; set; }
     }
 
     public partial class Service

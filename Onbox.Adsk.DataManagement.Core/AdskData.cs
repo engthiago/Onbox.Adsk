@@ -198,7 +198,7 @@ namespace Onbox.Adsk.DataManagement.Core
         public string LastModifiedUserName { get; set; }
         public string Path { get; set; }
         public long? ObjectCount { get; set; }
-        public bool Hidden { get; set; }
+        public bool? Hidden { get; set; }
         public FolderExtension Extension { get; set; }
         public bool? Reserved { get; set; }
         public DateTimeOffset? ReservedTime { get; set; }
@@ -250,7 +250,7 @@ namespace Onbox.Adsk.DataManagement.Core
 
     public partial class IncludedData
     {
-        public object TempUrn { get; set; }
+        public string TempUrn { get; set; }
         public Data Properties { get; set; }
         public string StorageUrn { get; set; }
         public string StorageType { get; set; }
