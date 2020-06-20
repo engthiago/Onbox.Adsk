@@ -4,11 +4,11 @@
     <TargetFramework>netstandard1.0</TargetFramework>
     <AssemblyName>Onbox.Adsk.DataManagement.Core</AssemblyName>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.0.33</Version>
+    <Version>0.0.35</Version>
     <Authors>Thiago</Authors>
     <Company>Onbox</Company>
-    <AssemblyVersion>0.0.33.0</AssemblyVersion>
-    <FileVersion>0.0.33.0</FileVersion>
+    <AssemblyVersion>0.0.35.0</AssemblyVersion>
+    <FileVersion>0.0.35.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>

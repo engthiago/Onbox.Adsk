@@ -41,6 +41,7 @@ namespace Onbox.Adsk.DataManagement
             if (!isAuth)
             {
                 var internalAuth = await this.InternalAuthorize();
+                await this.adsk2LegStore.SetInternalAuthorization(internalAuth);
                 return internalAuth;
             }
             else
@@ -76,6 +77,7 @@ namespace Onbox.Adsk.DataManagement
             if (!isAuth)
             {
                 var externalAuth = await this.ExternalAuthorize();
+                await this.adsk2LegStore.SetExternalAuthorization(externalAuth);
                 return externalAuth;
             }
             else
@@ -92,13 +94,11 @@ namespace Onbox.Adsk.DataManagement
 
         private async Task<AdskAuth> Authorize(string scope)
         {
-            var encodedScope = WebUtility.UrlEncode(scope);
-
             var form = new Dictionary<string, string>();
             form.Add("client_id", this.forgeConfig.GetClientId());
             form.Add("client_secret", this.forgeConfig.GetClientSecret());
             form.Add("grant_type", "client_credentials");
-            form.Add("scope", encodedScope);
+            form.Add("scope", scope);
 
             string endpoint = this.forgeConfig.GetBaseUrl()
                                 + $"authentication/v1/authenticate";
