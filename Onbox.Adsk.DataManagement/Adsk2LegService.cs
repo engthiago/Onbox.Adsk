@@ -9,24 +9,24 @@ namespace Onbox.Adsk.DataManagement
 {
     public class Adsk2LegService
     {
-        private AdskAuth internalAuth;
-        private AdskAuth publicAuth;
-
         private readonly IHttpService httpService;
         private readonly IAdskForgeConfigService forgeConfig;
+        private readonly IAdsk2LegStore adsk2LegStore;
 
-        public Adsk2LegService(IHttpService httpService, IAdskForgeConfigService forgeConfig)
+        public Adsk2LegService(IHttpService httpService, IAdskForgeConfigService forgeConfig, IAdsk2LegStore adsk2LegStore)
         {
             this.httpService = httpService;
             this.forgeConfig = forgeConfig;
+            this.adsk2LegStore = adsk2LegStore;
         }
 
         /// <summary>
         /// Checks if is internally authenticated with Adsk, internal Token is used for reading and writting data and should NOT be exposed for client agents
         /// </summary>
-        public bool IsInternalAuthenticated()
+        public async Task<bool> IsInternalAuthenticated()
         {
-            return this.internalAuth != null 
+            var internalAuth = await this.adsk2LegStore.GetInternalAuthorization();
+            return internalAuth != null 
                 && !string.IsNullOrWhiteSpace(internalAuth.AccessToken) 
                 && internalAuth.Expiration > DateTime.UtcNow.AddMilliseconds(10000) ?
                     true : false;
@@ -37,62 +37,63 @@ namespace Onbox.Adsk.DataManagement
         /// </summary>
         public async Task<AdskAuth> GetInternalAuthorization()
         {
-            if (!this.IsInternalAuthenticated())
+            var isAuth = await this.IsInternalAuthenticated();
+            if (!isAuth)
             {
-                internalAuth = await this.InternalAuthorize();
+                var internalAuth = await this.InternalAuthorize();
                 return internalAuth;
             }
             else
             {
-                return internalAuth;
+                return await this.adsk2LegStore.GetInternalAuthorization();
             }
         }
 
         private async Task<AdskAuth> InternalAuthorize()
         {
             var scope = "data:search data:read bucket:read bucket:create data:write bucket:delete account:read account:write";
-            var encodedScope = WebUtility.UrlEncode(scope);
-
-            return await Authorize(encodedScope);
+            return await Authorize(scope);
         }
 
         /// <summary>
-        /// Checks if is public authenticated with Adsk, public Token is used ONLY for reading data and CAN be exposed for client agents
+        /// Checks if is external authenticated with Adsk, external Token is used ONLY for reading data and CAN be exposed for client agents
         /// </summary>
-        public bool IsPublicAuthenticated()
+        public async Task<bool> IsExternalAuthenticated()
         {
-            return this.publicAuth != null
-                && !string.IsNullOrWhiteSpace(publicAuth.AccessToken)
-                && publicAuth.Expiration > DateTime.UtcNow.AddMilliseconds(10000) ?
+            var externalAuth = await this.adsk2LegStore.GetExternalAuthorization();
+            return externalAuth != null
+                && !string.IsNullOrWhiteSpace(externalAuth.AccessToken)
+                && externalAuth.Expiration > DateTime.UtcNow.AddMilliseconds(10000) ?
                     true : false;
         }
 
         /// <summary>
-        /// Gets the public Adsk token, public Token is used ONLY for reading data and CAN be exposed for client agents
+        /// Gets the external Adsk token, external Token is used ONLY for reading data and CAN be exposed for client agents
         /// </summary>
-        public async Task<AdskAuth> GetPublicAuthorization()
+        public async Task<AdskAuth> GetExternalAuthorization()
         {
-            if (!this.IsPublicAuthenticated())
+            var isAuth = await this.IsExternalAuthenticated();
+            if (!isAuth)
             {
-                publicAuth = await this.PublicAuthorize();
-                return publicAuth;
+                var externalAuth = await this.ExternalAuthorize();
+                return externalAuth;
             }
             else
             {
-                return publicAuth;
+                return await this.adsk2LegStore.GetExternalAuthorization();
             }
         }
 
-        private async Task<AdskAuth> PublicAuthorize()
+        private async Task<AdskAuth> ExternalAuthorize()
         {
             var scope = "data:read";
-            var encodedScope = WebUtility.UrlEncode(scope);
-
-            return await Authorize(encodedScope);
+            return await Authorize(scope);
         }
 
-        private async Task<AdskAuth> Authorize(string encodedScope)
+        private async Task<AdskAuth> Authorize(string scope)
         {
+            var encodedScope = WebUtility.UrlEncode(scope);
+
             var form = new Dictionary<string, string>();
             form.Add("client_id", this.forgeConfig.GetClientId());
             form.Add("client_secret", this.forgeConfig.GetClientSecret());

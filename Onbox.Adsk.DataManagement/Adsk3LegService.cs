@@ -76,16 +76,5 @@ namespace Onbox.Adsk.DataManagement
             return auth;
         }
 
-        /// <summary>
-        /// Gets the User Profile using a 3leg Access Token
-        /// </summary>
-        public async Task<AdskUserProfile> GetAdskUserProfile(string token)
-        {
-            string endpoint = this.forgeConfig.GetBaseUrl()
-                            + $"userprofile/v1/users/@me";
-
-            var userProfile = await this.httpService.GetAsync<AdskUserProfile>(endpoint, token);
-            return userProfile;
-        }
     }
 }

@@ -1,10 +1,8 @@
 ﻿using Onbox.Adsk.DataManagement.Core;
 using Onbox.Adsk.DataManagement.Core.Requests;
 using Onbox.Standard.Core.Http;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Onbox.Adsk.DataManagement
