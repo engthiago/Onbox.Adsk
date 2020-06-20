@@ -9,23 +9,25 @@ using System.Threading.Tasks;
 
 namespace Onbox.Adsk.DataManagement
 {
-    public class Bim360UserService : AdskServiceBase
+    public class Bim360UserService
     {
         private readonly IHttpService httpService;
         private readonly AdskIdConversionService idConversionService;
         private readonly BIM360RegionsService regionsService;
+        private readonly IAdskForgeConfigService forgeConfig;
 
-        public Bim360UserService(IHttpService httpService, AdskIdConversionService idConversionService, BIM360RegionsService regionsService)
+        public Bim360UserService(IHttpService httpService, AdskIdConversionService idConversionService, BIM360RegionsService regionsService, IAdskForgeConfigService forgeConfig)
         {
             this.httpService = httpService;
             this.idConversionService = idConversionService;
             this.regionsService = regionsService;
+            this.forgeConfig = forgeConfig;
         }
 
         public async Task<Paging<BIM360ProjectUser>> GetProjectUsersAsync(string projectId, string token)
         {
             projectId = this.idConversionService.RemoveBIMPrefix(projectId);
-            string endpoint = forgeBaseUrl
+            string endpoint = this.forgeConfig.GetBaseUrl()
                     + $"bim360/admin/v1/projects/{projectId}/users";
 
             return await this.httpService
@@ -36,7 +38,7 @@ namespace Onbox.Adsk.DataManagement
         {
             projectId = this.idConversionService.RemoveBIMPrefix(projectId);
 
-            string endpoint = forgeBaseUrl
+            string endpoint = this.forgeConfig.GetBaseUrl()
                     + $"bim360/admin/v1/projects/{projectId}/users/{userId}";
 
             return await this.httpService
@@ -49,7 +51,7 @@ namespace Onbox.Adsk.DataManagement
 
             var regionUrl = regionsService.GetRegionsUrl(region);
 
-            string endpoint = forgeBaseUrl
+            string endpoint = this.forgeConfig.GetBaseUrl()
                     + $"hq/v1/{regionUrl}/accounts/{accountId}/users/search?email={userEmail}&limit=1";
 
             var users = await this.httpService
@@ -62,7 +64,7 @@ namespace Onbox.Adsk.DataManagement
             accountId = this.idConversionService.RemoveBIMPrefix(accountId);
             var regionUrl = regionsService.GetRegionsUrl(region);
 
-            string endpoint = forgeBaseUrl
+            string endpoint = this.forgeConfig.GetBaseUrl()
                     + $"hq/v1/{regionUrl}/accounts/{accountId}/users/search?email={userEmail}&limit={limit}";
 
             return await this.httpService
@@ -101,7 +103,7 @@ namespace Onbox.Adsk.DataManagement
                 about_me = accountUser.AboutMe
             };
 
-            string endpoint = forgeBaseUrl
+            string endpoint = this.forgeConfig.GetBaseUrl()
                     + $"hq/v1/{regionUrl}/accounts/{accountId}/projects/{projectId}/users";
 
             return await this.httpService
@@ -114,7 +116,7 @@ namespace Onbox.Adsk.DataManagement
             projectId = this.idConversionService.RemoveBIMPrefix(projectId);
             var regionUrl = regionsService.GetRegionsUrl(region);
 
-            string endpoint = forgeBaseUrl
+            string endpoint = this.forgeConfig.GetBaseUrl()
                     + $"hq/v2/{regionUrl}/accounts/{accountId}/projects/{projectId}/users/{userId}";
 
 
@@ -129,7 +131,7 @@ namespace Onbox.Adsk.DataManagement
             projectId = this.idConversionService.RemoveBIMPrefix(projectId);
             var regionUrl = regionsService.GetRegionsUrl(region);
 
-            string endpoint = forgeBaseUrl
+            string endpoint = this.forgeConfig.GetBaseUrl()
                 + $"hq/v2/{regionUrl}/accounts/{accountId}/projects/{projectId}/users/import";
 
             return await this.httpService

@@ -1,30 +1,30 @@
 ﻿using Onbox.Adsk.DataManagement.Core;
 using Onbox.Adsk.DataManagement.Core.Requests;
 using Onbox.Standard.Core.Http;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Onbox.Adsk.DataManagement
 {
-    public class BIM360DataService : AdskServiceBase
+    public class BIM360DataService
     {
         private readonly IHttpService httpService;
         private readonly AdskIdConversionService idConversionService;
         private readonly BIM360RegionsService regionsService;
+        private readonly IAdskForgeConfigService forgeConfig;
 
-        public BIM360DataService(IHttpService httpService, AdskIdConversionService idConversionService, BIM360RegionsService regionsService)
+        public BIM360DataService(IHttpService httpService, AdskIdConversionService idConversionService, BIM360RegionsService regionsService, IAdskForgeConfigService forgeConfig)
         {
             this.httpService = httpService;
             this.idConversionService = idConversionService;
             this.regionsService = regionsService;
+            this.forgeConfig = forgeConfig;
         }
 
         public async Task<Hubs> GetHubsAsync(string token)
         {
-            string endpoint = forgeBaseUrl
+            string endpoint = this.forgeConfig.GetBaseUrl()
                         + "project/v1/hubs?filter[extension.type]=hubs:autodesk.bim360:Account";
 
             var hubs = await this.httpService.GetAsync<Hubs>(endpoint, token);
@@ -38,7 +38,7 @@ namespace Onbox.Adsk.DataManagement
 
             var regionUrl = regionsService.GetRegionsUrl(region);
 
-            string endpoint = forgeBaseUrl
+            string endpoint = this.forgeConfig.GetBaseUrl()
                     + $"hq/v1/{regionUrl}/accounts/{accountId}/projects/{projectId}";
 
             var project = await this.httpService.GetAsync<BIM360Project>(endpoint, token);
@@ -51,7 +51,7 @@ namespace Onbox.Adsk.DataManagement
 
             var regionUrl = regionsService.GetRegionsUrl(region);
 
-            string endpoint = forgeBaseUrl
+            string endpoint = this.forgeConfig.GetBaseUrl()
                 + $"hq/v1/{regionUrl}/accounts/{accountId}/projects";
 
             var projects = await this.httpService.PostAsync<BIM360Project>(endpoint, request, token);
@@ -67,7 +67,7 @@ namespace Onbox.Adsk.DataManagement
             accountId = this.idConversionService.RemoveBIMPrefix(accountId);
             var regionUrl = regionsService.GetRegionsUrl(region);
 
-            string endpoint = forgeBaseUrl
+            string endpoint = this.forgeConfig.GetBaseUrl()
                 + $"hq/v1/{regionUrl}/accounts/{accountId}/projects?limit={limit}&offset={offset}&sort={sortField}";
 
             var projects = await this.httpService.GetAsync<List<BIM360Project>>(endpoint, token);
@@ -114,7 +114,7 @@ namespace Onbox.Adsk.DataManagement
             accountId = this.idConversionService.AddBIMPrefix(accountId);
             projectId = this.idConversionService.AddBIMPrefix(projectId);
 
-            string endpoint = forgeBaseUrl
+            string endpoint = this.forgeConfig.GetBaseUrl()
                 + $"project/v1/hubs/{accountId}/projects/{projectId}/topFolders";
 
             var folders = await this.httpService.GetAsync<TopFolders>(endpoint, token);
@@ -125,7 +125,7 @@ namespace Onbox.Adsk.DataManagement
         {
             projectId = this.idConversionService.AddBIMPrefix(projectId);
 
-            string endpoint = forgeBaseUrl
+            string endpoint = this.forgeConfig.GetBaseUrl()
                 + $"data/v1/projects/{projectId}/folders/{folderId}/contents";
 
             var forgeItems = await this.httpService.GetAsync<FolderContents>(endpoint, token);
@@ -136,7 +136,7 @@ namespace Onbox.Adsk.DataManagement
         {
             projectId = this.idConversionService.AddBIMPrefix(projectId);
 
-            string endpoint = forgeBaseUrl
+            string endpoint = this.forgeConfig.GetBaseUrl()
                 + $"data/v1/projects/{projectId}/folders";
 
             object req = new
@@ -179,7 +179,7 @@ namespace Onbox.Adsk.DataManagement
         {
             projectId = this.idConversionService.AddBIMPrefix(projectId);
 
-            string endpoint = forgeBaseUrl
+            string endpoint = this.forgeConfig.GetBaseUrl()
                     + $"data/v1/projects/{projectId}/storage";
 
             var req = new
@@ -282,7 +282,7 @@ namespace Onbox.Adsk.DataManagement
                 }
             };
 
-            string endpoint = forgeBaseUrl
+            string endpoint = this.forgeConfig.GetBaseUrl()
                     + $"data/v1/projects/{projectId}/items";
 
             var versionPayloadResult = await this.httpService.PostAsync<Item>(endpoint, createVersionReq, token);
@@ -330,7 +330,7 @@ namespace Onbox.Adsk.DataManagement
                 }
             };
 
-            string endpoint = forgeBaseUrl
+            string endpoint = this.forgeConfig.GetBaseUrl()
                     + $"data/v1/projects/{projectId}/versions";
 
             var versionPayloadResult = await this.httpService.PostAsync<Item>(endpoint, updateVersionReq, token);

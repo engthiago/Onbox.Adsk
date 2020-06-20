@@ -9,18 +9,20 @@ using System.Threading.Tasks;
 
 namespace Onbox.Adsk.DataManagement
 {
-    public class AdskDataService : AdskServiceBase
+    public class AdskDataService
     {
         private readonly IHttpService httpService;
+        private readonly IAdskForgeConfigService forgeConfig;
 
-        public AdskDataService(IHttpService httpService)
+        public AdskDataService(IHttpService httpService, IAdskForgeConfigService forgeConfig)
         {
             this.httpService = httpService;
+            this.forgeConfig = forgeConfig;
         }
 
         public async Task<Hubs> GetHubsAsync(string token)
         {
-            string endpoint = forgeBaseUrl
+            string endpoint = this.forgeConfig.GetBaseUrl()
                 + "project/v1/hubs";
 
             var hubs = await this.httpService.GetAsync<Hubs>(endpoint, token);
@@ -29,7 +31,7 @@ namespace Onbox.Adsk.DataManagement
 
         public async Task<Projects> GetProjectsAsync(string hubId, string token)
         {
-            string endpoint = forgeBaseUrl
+            string endpoint = this.forgeConfig.GetBaseUrl()
                 + $"project/v1/hubs/{hubId}/projects";
 
             var projects = await this.httpService.GetAsync<Projects>(endpoint, token);
@@ -41,7 +43,7 @@ namespace Onbox.Adsk.DataManagement
             page = page >= 0 ? page : 1;
             pageSize = pageSize > 0 ? pageSize : 1;
 
-            string endpoint = forgeBaseUrl
+            string endpoint = this.forgeConfig.GetBaseUrl()
                 + $"project/v1/hubs/{hubId}/projects?page[number]={page}&page[limit]={pageSize}";
 
             var projects = await this.httpService.GetAsync<Projects>(endpoint, token);
@@ -86,7 +88,7 @@ namespace Onbox.Adsk.DataManagement
 
         public async Task<TopFolders> GetTopFoldersAsync(string hubId, string projectId, string token)
         {
-            string endpoint = forgeBaseUrl
+            string endpoint = this.forgeConfig.GetBaseUrl()
                 + $"project/v1/hubs/{hubId}/projects/{projectId}/topFolders";
 
             var folders = await this.httpService.GetAsync<TopFolders>(endpoint, token);
@@ -95,7 +97,7 @@ namespace Onbox.Adsk.DataManagement
 
         public async Task<SearchResults> SearchItemAsync(string projectId, string folderId, string partialName, string token)
         {
-            string endpoint = forgeBaseUrl
+            string endpoint = this.forgeConfig.GetBaseUrl()
                 + $"data/v1/projects/{projectId}/folders/{folderId}/search?filter[attributes.name]-contains={partialName}";
 
             var itemSearch = await this.httpService.GetAsync<SearchResults>(endpoint, token);
@@ -104,7 +106,7 @@ namespace Onbox.Adsk.DataManagement
 
         public async Task<SearchResults> SearchItemByC4RGuidsAsync(string projectId, string folderId, Guid modelGuid, Guid projectGuid, string token)
         {
-            string endpoint = forgeBaseUrl
+            string endpoint = this.forgeConfig.GetBaseUrl()
                 + $"data/v1/projects/{projectId}/folders/{folderId}/search?"
                 + $"filter[attributes.extension.data.projectGuid]={projectGuid.ToString()}"
                 + $"&"
@@ -116,7 +118,7 @@ namespace Onbox.Adsk.DataManagement
 
         public async Task<Item> GetForgeItemAsync(string projectId, string itemId, string token)
         {
-            string endpoint = forgeBaseUrl
+            string endpoint = this.forgeConfig.GetBaseUrl()
                 + $"data/v1/projects/{projectId}/items/{itemId}?includePathInProject=true";
 
             var item = await this.httpService.GetAsync<Item>(endpoint, token);
@@ -125,7 +127,7 @@ namespace Onbox.Adsk.DataManagement
 
         public async Task<Folder> GetFolderAsync(string projectId, string folderId, string token)
         {
-            string endpoint = forgeBaseUrl
+            string endpoint = this.forgeConfig.GetBaseUrl()
                 + $"data/v1/projects/{projectId}/folders/{folderId}";
 
             var folder = await this.httpService.GetAsync<Folder>(endpoint, token);
@@ -134,7 +136,7 @@ namespace Onbox.Adsk.DataManagement
 
         public async Task<FolderContents> GetFolderContentsAsync(string projectId, string folderId, string token)
         {
-            string endpoint = forgeBaseUrl
+            string endpoint = this.forgeConfig.GetBaseUrl()
                 + $"data/v1/projects/{projectId}/folders/{folderId}/contents";
 
             var forgeItems = await this.httpService.GetAsync<FolderContents>(endpoint, token);
@@ -143,7 +145,7 @@ namespace Onbox.Adsk.DataManagement
 
         public async Task<Storage> PrepareStorageObjectAsync(string projectId, string fileName, string folderId, string token)
         {
-            string endpoint = forgeBaseUrl
+            string endpoint = this.forgeConfig.GetBaseUrl()
                     + $"data/v1/projects/{projectId}/storage";
 
             var req = new
@@ -181,7 +183,7 @@ namespace Onbox.Adsk.DataManagement
         {
             var fileRef = storage.Data.Id.Remove(0, "urn:adsk.objects:os.object:wip.dm.prod/".Length);
 
-            string endpoint = forgeBaseUrl
+            string endpoint = this.forgeConfig.GetBaseUrl()
                     + $"oss/v2/buckets/wip.dm.prod/objects/{fileRef}";
 
             var forgeItems = await this.httpService.PutStreamAsync<ObjectReference>(endpoint, payload, token);

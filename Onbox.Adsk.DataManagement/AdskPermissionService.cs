@@ -7,13 +7,15 @@ using System.Threading.Tasks;
 
 namespace Onbox.Adsk.DataManagement
 {
-    public class AdskPermissionService : AdskServiceBase
+    public class AdskPermissionService
     {
         private readonly IHttpService httpService;
+        private readonly IAdskForgeConfigService forgeConfig;
 
-        public AdskPermissionService(IHttpService httpService)
+        public AdskPermissionService(IHttpService httpService, IAdskForgeConfigService forgeConfig)
         {
             this.httpService = httpService;
+            this.forgeConfig = forgeConfig;
         }
 
         public async Task<BIM360PermissionCommandResults> CheckPermissionsCommandAsync(AdskPermissionRequirementsBuilder permissionBuilder, string projectId, string token)
@@ -49,7 +51,7 @@ namespace Onbox.Adsk.DataManagement
                 }
             };
 
-            string endpoint = forgeBaseUrl
+            string endpoint = this.forgeConfig.GetBaseUrl()
                 + $"data/v1/projects/{projectId}/commands";
 
             return await this.httpService.PostAsync<BIM360PermissionCommandResults>(endpoint, commandReq, token);
@@ -57,7 +59,7 @@ namespace Onbox.Adsk.DataManagement
 
         public async Task<BIM360FolderPermissions> GetBIM360FolderPermissionsAsync(string projectId, string folderId, string token)
         {
-            string endpoint = forgeBaseUrl
+            string endpoint = this.forgeConfig.GetBaseUrl()
                 + $"bim360/docs/v1/projects/{projectId}/folders/{folderId}/permissions";
 
             return await this.httpService.PostAsync<BIM360FolderPermissions>(endpoint, token);
