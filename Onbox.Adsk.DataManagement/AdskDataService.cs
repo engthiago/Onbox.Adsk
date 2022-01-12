@@ -1,10 +1,8 @@
 ﻿using Onbox.Abstractions.V9;
 using Onbox.Adsk.DataManagement.Core;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Onbox.Adsk.DataManagement

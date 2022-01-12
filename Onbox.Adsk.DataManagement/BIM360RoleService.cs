@@ -2,7 +2,6 @@
 using Onbox.Adsk.DataManagement.Core;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Onbox.Adsk.DataManagement
