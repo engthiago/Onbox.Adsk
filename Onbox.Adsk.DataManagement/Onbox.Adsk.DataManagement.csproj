@@ -11,7 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Onbox.Standard.Core" Version="0.0.4" />
+    <PackageReference Include="Onbox.Core" Version="9.0.0" />
   </ItemGroup>
 
   <ItemGroup>

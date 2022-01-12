@@ -10,7 +10,7 @@ namespace Onbox.Adsk.DataManagement
         {
             if (region != "US")
             {
-                return "regions/eu";
+                return "regions/eu/";
             }
             else
             {

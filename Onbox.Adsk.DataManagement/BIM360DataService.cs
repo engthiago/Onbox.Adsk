@@ -1,6 +1,6 @@
-﻿using Onbox.Adsk.DataManagement.Core;
+﻿using Onbox.Abstractions.V9;
+using Onbox.Adsk.DataManagement.Core;
 using Onbox.Adsk.DataManagement.Core.Requests;
-using Onbox.Standard.Core.Http;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -68,7 +68,7 @@ namespace Onbox.Adsk.DataManagement
             var regionUrl = regionsService.GetRegionsUrl(region);
 
             string endpoint = this.forgeConfig.GetBaseUrl()
-                + $"hq/v1/{regionUrl}/accounts/{accountId}/projects?limit={limit}&offset={offset}&sort={sortField}";
+                + $"hq/v1/{regionUrl}accounts/{accountId}/projects?limit={limit}&offset={offset}&sort={sortField}";
 
             var projects = await this.httpService.GetAsync<List<BIM360Project>>(endpoint, token);
             return projects;

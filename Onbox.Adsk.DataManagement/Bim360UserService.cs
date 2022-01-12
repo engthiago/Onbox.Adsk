@@ -1,6 +1,6 @@
-﻿using Onbox.Adsk.DataManagement.Core;
+﻿using Onbox.Abstractions.V9;
+using Onbox.Adsk.DataManagement.Core;
 using Onbox.Adsk.DataManagement.Core.Requests;
-using Onbox.Standard.Core.Http;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -24,6 +24,7 @@ namespace Onbox.Adsk.DataManagement
 
         public async Task<Paging<BIM360ProjectUser>> GetProjectUsersAsync(string projectId, string token)
         {
+            // This will list up to 20 users
             projectId = this.idConversionService.RemoveBIMPrefix(projectId);
             string endpoint = this.forgeConfig.GetBaseUrl()
                     + $"bim360/admin/v1/projects/{projectId}/users";
